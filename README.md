@@ -1,30 +1,30 @@
 # Che ci vediamo?
 
-PWA statica personale per ricordare film e serie TV da vedere. Sottotitolo: **Per non buttare le serate**.
+PWA personale per ricordare film e serie TV da vedere. Sottotitolo: **Per non buttare le serate**.
 
-## Uso locale
+## Pubblicare su GitHub Pages
 
-Apri `index.html` in Chrome per l'uso base. Per avere il service worker e l'installazione PWA, servi la cartella con un server statico, ad esempio:
+1. Crea un repository su GitHub (per Pages gratuito deve essere pubblico).
+2. Carica **i file** di questa cartella nella radice del repository (non il file zip): `index.html`, `config.js`, `sw.js`, `manifest.webmanifest`, `logo.svg`, le tre icone `icon-*.png` e `.nojekyll`.
+3. In **Settings → Pages** scegli *Deploy from a branch*, branch `main`, cartella `/ (root)`.
+4. Dopo un minuto l'app è su `https://TUOUTENTE.github.io/NOMEREPO/`.
 
-```bash
-python3 -m http.server 8080
-```
+Per aggiornare l'app basta ricaricare i file modificati nel repository.
 
-Poi apri `http://localhost:8080`.
+## Ricerca in italiano (chiave TMDB)
 
-## Cloudflare Pages
+1. Crea un account gratuito su themoviedb.org.
+2. Vai in **Impostazioni → API**, richiedi una chiave per uso personale e copia la **API Key** (v3).
+3. Incollala in `config.js` dentro `tmdbKey: ''`.
 
-Crea un nuovo progetto Pages e carica questa cartella come sito statico. Non serve build command e la directory di output è la root del progetto. In alternativa collega il repository e imposta:
-
-- Build command: vuoto
-- Build output directory: `.`
-
-L'app non usa backend né chiavi API. La ricerca usa iTunes Search API per i film e TVmaze per le serie (quindi copre anche titoli internazionali come The Wire). I dati della lista restano nel `localStorage` del browser. Usa **Esporta backup** per trasferirli o conservarli.
+Con la chiave: locandine, trame, generi e regia in italiano. Senza chiave l'app usa iTunes, Wikipedia, TVmaze e IMDb: funziona, ma con meno precisione e trame spesso in inglese.
+Nota: su un repository pubblico la chiave è leggibile da chiunque. È gratuita e si può rigenerare in qualsiasi momento.
 
 ## Funzioni
 
-- Ricerca automatica di film e serie TV con locandine e schede.
-- Liste separate per Film e Serie TV.
-- Il pulsante `+` aggiunge subito il film o la serie alla lista. Le informazioni aggiuntive, come stagione, piattaforma o note personali, si possono inserire e modificare in seguito dalla scheda del titolo.
-- Filtri, ordinamento, stato “già visto”, dettaglio scheda, backup/import JSON.
-- PWA installabile e cache offline dell'interfaccia.
+- Ricerca di film e serie TV con locandine, trame e schede. Puoi aggiungere l'anno alla ricerca (es. `Dune 1984`).
+- Il pulsante `+` aggiunge subito il titolo alla lista; i doppioni vengono bloccati (stesso titolo e anno).
+- Liste separate per Film e Serie TV, filtro, ordinamento, stato "già visto", note personali.
+- Backup e import in JSON: l'import aggiunge i titoli nuovi senza cancellare quelli presenti.
+- Installabile come app, tema chiaro/scuro automatico.
+- I dati restano nel browser del dispositivo: esporta un backup ogni tanto.
