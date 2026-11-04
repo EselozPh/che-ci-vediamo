@@ -4,5 +4,5 @@
 // Senza chiave l'app funziona con fonti alternative, meno complete.
 window.CCV_CONFIG = {
   version: 2,
-  tmdbKey: 'c13e92009be186d341fbcfafc032b942'
+  tmdbKey: ''
 };
